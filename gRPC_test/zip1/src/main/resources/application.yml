@@ -1,0 +1,25 @@
+server:
+  port: 80   # server.port=80
+  servlet:
+    context-path: /zip  # server.servlet.context-path=/probono
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    password: user01
+    #mysql container? ?? ??? ??, build? ?? ?? ??
+    #build?? test? ?? db? ?? ??? ???? ?? ??? skip?? ?
+    url: jdbc:mysql://127.0.0.1:8777/fisa?useSSL=false&allowPublicKeyRetrieval=true
+    #url: jdbc:mysql://mysqlcommdb:3306/fisa?useSSL=false&allowPublicKeyRetrieval=true
+    #url: jdbc:mysql://127.0.0.1:3306/fisa?useSSL=false&allowPublicKeyRetrieval=true
+    #url: jdbc:mysql://db17.cfaa2gyks0rb.ap-northeast-2.rds.amazonaws.com:3306/fisa?useSSL=false&allowPublicKeyRetrieval=true
+    username: user01
+  jpa:
+    database: mysql
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+    generate-ddl: true
+    hibernate:
+      ddl-auto: none
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true

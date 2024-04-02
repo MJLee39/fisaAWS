@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <a href="#" onclick="zipOneView()">집 하나 보기</a><p>
+    <hr>
+    <div id = "zipOneView">집 정보 보기</div>
+
+    <script>
+        //집 하나 정보 검색 시 호출되는 함수
+        function zipOneView(v){
+            const xhttp = new XMLHttpRequest();
+            xhttp.onload = function (){
+                let data = JSON.parse(this.responseText);
+
+                let tableElement = `
+                    선택한 집 정보 <br>
+                    <table border="1">
+                        <tr><th>id</th><th>중개사</th><th>확인일자</th><th>매물인덱스</th><th>방향</th><th>전체 층수</th><th>층수</th><th>건물유형</th><th>보증금</th><th>월세</th><th>입주가능일</th><th>옵션</th><th>공급면적</th></tr>
+                        <tr>
+                            <td>${data.id}</td>
+                            <td>${data.agent_id}</td>
+                            <td>${data.cheked_at}</td>
+                            <td>${data.estate_id}</td>
+                            <td>${data.direction}</td>
+                            <td>${data.total_floor}</td>
+                            <td>${data.building_floor}</td>
+                            <td>${data.building_type}</td>
+                            <td>${data.deposit}</td>
+                            <td>${data.fee}</td>
+                            <td>${data.available}</td>
+                            <td>${data.hashtag}</td>
+                            <td>${data.m2}</td>
+                        </tr>
+                    </table>`
+                document.getElementById("zipOneView").innerHTML = tableElement;
+            };
+            xhttp.open("GET", "zipOne?zip_id="+1);
+            xhttp.send();
+        }
+    </script>
+</body>
+</html>
