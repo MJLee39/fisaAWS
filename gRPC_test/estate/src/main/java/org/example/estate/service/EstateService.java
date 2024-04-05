@@ -1,16 +1,15 @@
-package com.example.zip1.service;
+package org.example.estate.service;
 
-import com.example.zip1.dto.EstateDTO;
-import com.example.zip1.dto.EstateUpdateDTO;
-import com.example.zip1.dto.ZipDTO;
-import com.example.zip1.entity.Estate;
-import com.example.zip1.entity.Zip;
-import com.example.zip1.exception.MessageException;
-import com.example.zip1.exception.NotExistException;
-import com.example.zip1.model.EstateRepository;
+
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import lombok.extern.slf4j.Slf4j;
+import org.example.estate.dto.EstateDTO;
+import org.example.estate.dto.EstateUpdateDTO;
+import org.example.estate.entity.Estate;
+import org.example.estate.exception.MessageException;
+import org.example.estate.exception.NotExistException;
+import org.example.estate.model.EstateRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -53,7 +52,7 @@ public class EstateService {
 
     //estate 정보 insert
     @Transactional
-    public boolean insertEstate(EstateDTO estateDTO) throws MessageException{
+    public boolean insertEstate(EstateDTO estateDTO) throws MessageException {
         if(estateDTO.getId() == null){
            //건물 주소 + 상세정보 -> md5 해싱
            String bulidingAddress = "서울시 상암동 IT 타워";
@@ -63,6 +62,8 @@ public class EstateService {
         Estate estateEntity = mapper.map(estateDTO, Estate.class);
         log.info("estate insert dto {}", estateDTO.toString());
         log.info("zip entity {}", estateEntity.toString());
+
+//        Estate estate = estateRepository.findById(estateEntity.getId()).orElseThrow(EntityNotFoundException::new);
 
         if(estateRepository.findById(estateEntity.getId()).isPresent()){
             throw new MessageException("이미 존재하는 estate입니다.");

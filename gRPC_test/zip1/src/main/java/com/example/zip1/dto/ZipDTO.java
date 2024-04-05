@@ -1,5 +1,6 @@
 package com.example.zip1.dto;
 
+import com.example.zip1.entity.Zip;
 import jakarta.persistence.Id;
 import lombok.*;
 
@@ -11,7 +12,6 @@ import java.util.UUID;
 @AllArgsConstructor
 @Getter
 @Builder
-@ToString
 public class ZipDTO {
 
     private String id;
@@ -41,6 +41,10 @@ public class ZipDTO {
     private String hashtag;
 
     private float m2;
+
+    private String location;
+
+    private String note;
 
     public void setId(String id) {
         this.id = id;
@@ -96,5 +100,32 @@ public class ZipDTO {
 
     public void setM2(float m2) {
         this.m2 = m2;
+    }
+
+    public void setLocation(String location){ this.location = location; }
+
+    public void setNote(String note) {
+        this.note = note;
+    }
+
+    public static ZipDTO fromEntity(Zip zip) {
+        ZipDTO zipDTO = new ZipDTO();
+        zipDTO.setId(zip.getId());
+        zipDTO.setAttachments(zip.getAttachments());
+        zipDTO.setAgentId(zip.getAgentId());
+        zipDTO.setCheckedAt(zip.getCheckedAt());
+        zipDTO.setEstateId(zip.getEstateId());
+        zipDTO.setDirection(zip.getDirection());
+        zipDTO.setTotalFloor(zip.getTotalFloor());
+        zipDTO.setBuildingFloor(zip.getBuildingFloor());
+        zipDTO.setBuildingType(zip.getBuildingType());
+        zipDTO.setDeposit(zip.getDeposit());
+        zipDTO.setFee(zip.getFee());
+        zipDTO.setAvailable(zip.getAvailable());
+        zipDTO.setHashtag(zip.getHashtag());
+        zipDTO.setM2(zip.getM2());
+        zipDTO.setLocation(zip.getLocation());
+        zipDTO.setNote(zip.getNote());
+        return zipDTO;
     }
 }

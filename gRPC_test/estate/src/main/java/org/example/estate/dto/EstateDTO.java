@@ -1,4 +1,4 @@
-package com.example.zip1.dto;
+package org.example.estate.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -30,8 +30,6 @@ public class EstateDTO {
     private String hashtag;
 
     private float m2;
-
-    private boolean success;
 
     public void setId(String id) {
         this.id = id;
@@ -73,7 +71,4 @@ public class EstateDTO {
         this.m2 = m2;
     }
 
-    public void setSuccess(boolean success) {
-        this.success = success;
-    }
 }

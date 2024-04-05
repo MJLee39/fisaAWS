@@ -1,5 +1,6 @@
 package com.example.zip1.entity;
 
+import com.example.zip1.dto.ZipDTO;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.DynamicUpdate;
@@ -16,7 +17,6 @@ import java.util.UUID;
 @NoArgsConstructor
 @Getter
 @Builder
-@ToString
 public class Zip {
 
     @Id
@@ -48,6 +48,17 @@ public class Zip {
 
     private float m2;
 
+    private String location;
+
+    private String note;
+
+    public void setNote(String note) {
+        this.note = note;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
 
     public void setId(String id) {
         this.id = id;
@@ -104,5 +115,29 @@ public class Zip {
 
     public void setM2(float m2) {
         this.m2 = m2;
+    }
+
+
+
+    // DTO를 Entity로 변환하는 메서드
+    public static Zip toEntity(ZipDTO zipDTO) {
+        Zip zip = new Zip();
+        zip.setId(zipDTO.getId());
+        zip.setAttachments(zipDTO.getAttachments());
+        zip.setAgentId(zipDTO.getAgentId());
+        zip.setCheckedAt(zipDTO.getCheckedAt());
+        zip.setEstateId(zipDTO.getEstateId());
+        zip.setDirection(zipDTO.getDirection());
+        zip.setTotalFloor(zipDTO.getTotalFloor());
+        zip.setBuildingFloor(zipDTO.getBuildingFloor());
+        zip.setBuildingType(zipDTO.getBuildingType());
+        zip.setDeposit(zipDTO.getDeposit());
+        zip.setFee(zipDTO.getFee());
+        zip.setAvailable(zipDTO.getAvailable());
+        zip.setHashtag(zipDTO.getHashtag());
+        zip.setM2(zipDTO.getM2());
+        zip.setLocation(zipDTO.getLocation());
+        zip.setNote(zip.getNote());
+        return zip;
     }
 }

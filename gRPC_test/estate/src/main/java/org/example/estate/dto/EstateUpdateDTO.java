@@ -1,4 +1,4 @@
-package com.example.zip1.dto;
+package org.example.estate.dto;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

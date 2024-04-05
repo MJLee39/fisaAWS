@@ -1,7 +1,6 @@
-package com.example.zip1.entity;
+package org.example.estate.entity;
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import lombok.*;
 import org.hibernate.annotations.DynamicUpdate;
@@ -12,7 +11,6 @@ import org.hibernate.annotations.DynamicUpdate;
 @AllArgsConstructor
 @Builder
 @Getter
-@ToString
 public class Estate {
 
     @Id

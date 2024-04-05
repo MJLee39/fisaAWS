@@ -22,8 +22,12 @@ import java.util.UUID;
 @Service
 public class ZipService {
 
+    private final ZipRepository zipRepository;
+
     @Autowired
-    private ZipRepository zipRepository;
+    public ZipService(ZipRepository zipRepository){
+        this.zipRepository = zipRepository;
+    }
 
     @Autowired
     private ModelMapper mapper; // ModelMapper 주입
@@ -33,12 +37,11 @@ public class ZipService {
     public ZipDTO getZip(String id) throws Exception{
         Optional<Zip> zipEntity = zipRepository.findById(id);
 
-        if(!zipEntity.isPresent() && zipEntity.get() == null){
+        if(zipEntity.isEmpty()){
             throw new NotExistException("해당하는 zip이 존재하지 않습니다.");
         }
         ZipDTO zipDTO = mapper.map(zipEntity.get(), ZipDTO.class);
-        log.info("get zip dto {}", zipDTO.toString());
-        log.info("get zip entity {}", zipEntity.toString());
+
         return zipDTO;
     }
 
@@ -46,13 +49,14 @@ public class ZipService {
     public List<ZipDTO> getZipAll() throws Exception{
         List<Zip> zipEntitys = zipRepository.findAll();
 
+//        List<ZipDTO> list = zipEntitys.stream().map(zipEntity -> mapper.map(zipEntity, ZipDTO.class)).toList();
         List<ZipDTO> zipDTOs = Arrays.asList(mapper.map(zipEntitys, ZipDTO[].class));
         return zipDTOs;
     }
 
     //집 정보 insert
     @Transactional
-    public boolean insertZip(ZipDTO zipDTO) throws MessageException{
+    public Zip insertZip(ZipDTO zipDTO) throws MessageException{
         if(zipDTO.getId()==null){
             UUID uuid = UUID.randomUUID();
             zipDTO.setId(uuid.toString());
@@ -67,8 +71,7 @@ public class ZipService {
             throw new MessageException("이미 존재하는 zip입니다.");
         }
         zipEntity = zipRepository.save(zipEntity);
-        return true;
-
+        return zipEntity;
     }
 
     //집 정보 update
@@ -91,6 +94,7 @@ public class ZipService {
             zip.setCheckedAt(zipUpdateDTO.getCheckedAt());
             zip.setAgentId(zipUpdateDTO.getAgentId());
             zip.setEstateId(zip.getEstateId());
+            zip.setNote(zip.getNote());
         }
 
         return zip;
@@ -122,6 +126,8 @@ public class ZipService {
                 && zip.getHashtag().equals(zipUpdateDTO.getHashtag())
                 && Float.compare(zip.getM2(), zipUpdateDTO.getM2()) == 0
                 && zip.getAgentId().equals(zipUpdateDTO.getAgentId())
-                && zip.getEstateId().equals(zipUpdateDTO.getEstateId());
+                && zip.getEstateId().equals(zipUpdateDTO.getEstateId())
+                && zip.getLocation().equals(zipUpdateDTO.getLocation())
+                && zip.getNote().equals(zipUpdateDTO.getNote());
     }
 }

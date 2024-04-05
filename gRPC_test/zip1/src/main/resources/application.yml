@@ -23,3 +23,14 @@ spring:
     properties:
       hibernate:
         format_sql: true
+
+  mvc: # jsp 사용을 위한 필수 설정, WEB-INF 폴더 직접 만들고, pom.xml에 설정, ProbonoController의 메소드 setViewName()확인하기
+    view:
+      prefix: /WEB-INF/jsp/    # spring.mvc.view.prefix: /WEB-INF/
+      suffix: .jsp         # spring.mvc.view.suffix: .jsp
+
+grpc:
+  client:
+    auth-server: # 이건 gRPC 서버 이름 지정 아무거나 가능
+      address: 'static://127.0.0.1:8090' # static 뒤에 gRPC 서버의 주소와 포트
+      negotiation-type: plaintext # 통신 할 때 방식

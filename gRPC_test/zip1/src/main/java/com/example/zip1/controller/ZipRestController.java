@@ -5,6 +5,7 @@ import com.example.zip1.dto.ZipUpdateDTO;
 import com.example.zip1.entity.Zip;
 import com.example.zip1.service.ZipService;
 import jakarta.persistence.EntityNotFoundException;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,8 +19,12 @@ import java.util.UUID;
 @RestController
 public class ZipRestController {
 
+    private final ZipService zipService;
+
     @Autowired
-    ZipService zipService;
+    public ZipRestController(ZipService zipService) {
+        this.zipService = zipService;
+    }
 
     @GetMapping("/zipOne")
     public ZipDTO getZip(@RequestParam("zip_id") String id) throws Exception{
@@ -32,7 +37,7 @@ public class ZipRestController {
     }
 
     @PostMapping("/insert")
-    public ResponseEntity<Boolean> insertZip(@RequestBody ZipDTO zipDTO) throws Exception{
+    public ResponseEntity<Zip> insertZip(@RequestBody ZipDTO zipDTO) throws Exception{
         log.info("zipDTO : {}", zipDTO.toString());
         return ResponseEntity.status(HttpStatus.OK).body(zipService.insertZip(zipDTO));
     }
@@ -43,18 +48,14 @@ public class ZipRestController {
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<String> deleteZip(@PathVariable String id){
-        try{
-            boolean deleted = zipService.deleteZip(id);
-            if (deleted) {
-                return ResponseEntity.ok("Zip 정보가 삭제되었습니다.");
-            } else {
-                return ResponseEntity.notFound().build();
-            }
-        }catch (EntityNotFoundException e) {
-            return (ResponseEntity<String>) ResponseEntity.notFound();
-        }  catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("서버 오류가 발생했습니다.");
+    public ResponseEntity<String> deleteZip(@PathVariable String id) throws Exception{
+
+        boolean deleted = zipService.deleteZip(id);
+        if (deleted) {
+            return ResponseEntity.ok("Zip 정보가 삭제되었습니다.");
+        } else {
+            return ResponseEntity.notFound().build();
         }
+
     }
 }

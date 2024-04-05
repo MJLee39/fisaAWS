@@ -1,4 +1,4 @@
-package com.example.zip1.config;
+package org.example.estate.config;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;

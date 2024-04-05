@@ -1,13 +1,12 @@
-package com.example.zip1.controller;
+package org.example.estate.controller;
 
-import com.example.zip1.dto.EstateDTO;
-import com.example.zip1.dto.EstateUpdateDTO;
-import com.example.zip1.dto.ZipDTO;
-import com.example.zip1.entity.Estate;
-import com.example.zip1.service.EstateService;
 import jakarta.persistence.EntityNotFoundException;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.example.estate.dto.EstateDTO;
+import org.example.estate.dto.EstateUpdateDTO;
+import org.example.estate.entity.Estate;
+import org.example.estate.service.EstateService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,11 +14,11 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Slf4j
+@RequiredArgsConstructor
 @RestController
 public class EstateRestController {
 
-    @Autowired
-    EstateService estateService;
+    private final EstateService estateService;
 
     @GetMapping("/estateOne")
     public EstateDTO getEstate(@RequestParam("estate_id") String id) throws Exception{
