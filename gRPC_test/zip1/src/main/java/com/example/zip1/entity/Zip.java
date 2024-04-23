@@ -1,143 +1,177 @@
 package com.example.zip1.entity;
 
-import com.example.zip1.dto.ZipDTO;
-import jakarta.persistence.*;
-import lombok.*;
-import org.hibernate.annotations.DynamicUpdate;
-import org.hibernate.annotations.GenericGenerator;
-import org.springframework.cglib.core.Local;
-
 import java.time.LocalDateTime;
-import java.util.Date;
-import java.util.UUID;
+
+import org.hibernate.annotations.DynamicUpdate;
+
+import com.example.zip1.dto.ZipDTO;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Entity
 @DynamicUpdate
 @AllArgsConstructor
 @NoArgsConstructor
-@Getter
 @Builder
+@Getter
 public class Zip {
 
-    @Id
-    private String id; // UUID 타입의 식별자 필드
+	@Id
+	private String id; // UUID 타입의 식별자 필드
 
-    private String attachments;
+	private String attachments;
 
-    private String agentId;
+	private String agentId;
 
-    private LocalDateTime checkedAt;
+	private LocalDateTime checkedAt;
 
-    private String estateId;
+	private String estateId;
 
-    private String direction;
+	private String direction;
 
-    private int totalFloor;
+	private int totalFloor;
 
-    private int buildingFloor;
+	private int buildingFloor;
 
-    private String buildingType;
+	private String buildingType;
 
-    private int deposit;
+	private int deposit;
 
-    private int fee;
+	private int fee;
 
-    private LocalDateTime available;
+	private LocalDateTime available;
 
-    private String hashtag;
+	private String hashtag;
 
-    private float m2;
+	private float m2;
 
-    private String location;
+	private String location;
 
-    private String note;
+	private String note;
 
-    public void setNote(String note) {
-        this.note = note;
-    }
+	private String showYes;
 
-    public void setLocation(String location) {
-        this.location = location;
-    }
+	private int room;
 
-    public void setId(String id) {
-        this.id = id;
-    }
+	private int toilet;
 
+	private float maintenanceFee;
 
-    public void setAttachments(String attachments) {
-        this.attachments = attachments;
-    }
+	private LocalDateTime premium;
 
-    public void setAgentId(String agentId) {
-        this.agentId = agentId;
-    }
+	public void setPremium(LocalDateTime premium) {
+		this.premium = premium;
+	}
 
-    public void setCheckedAt(LocalDateTime checkedAt) {
-        this.checkedAt = checkedAt;
-    }
+	public void setRoom(int room) {
+		this.room = room;
+	}
 
-    public void setEstateId(String estateId) {
-        this.estateId = estateId;
-    }
+	public void setToilet(int toilet) {
+		this.toilet = toilet;
+	}
 
-    public void setDirection(String direction) {
-        this.direction = direction;
-    }
+	public void setMaintenanceFee(float maintenanceFee) {
+		this.maintenanceFee = maintenanceFee;
+	}
 
-    public void setTotalFloor(int totalFloor) {
-        this.totalFloor = totalFloor;
-    }
+	public void setNote(String note) {
+		this.note = note;
+	}
 
-    public void setBuildingFloor(int buildingFloor) {
-        this.buildingFloor = buildingFloor;
-    }
+	public void setLocation(String location) {
+		this.location = location;
+	}
 
-    public void setBuildingType(String buildingType) {
-        this.buildingType = buildingType;
-    }
+	public void setId(String id) {
+		this.id = id;
+	}
 
-    public void setDeposit(int deposit) {
-        this.deposit = deposit;
-    }
+	public void setAttachments(String attachments) {
+		this.attachments = attachments;
+	}
 
-    public void setFee(int fee) {
-        this.fee = fee;
-    }
+	public void setAgentId(String agentId) {
+		this.agentId = agentId;
+	}
 
-    public void setAvailable(LocalDateTime available) {
-        this.available = available;
-    }
+	public void setCheckedAt(LocalDateTime checkedAt) {
+		this.checkedAt = checkedAt;
+	}
 
-    public void setHashtag(String hashtag) {
-        this.hashtag = hashtag;
-    }
+	public void setEstateId(String estateId) {
+		this.estateId = estateId;
+	}
 
-    public void setM2(float m2) {
-        this.m2 = m2;
-    }
+	public void setDirection(String direction) {
+		this.direction = direction;
+	}
 
+	public void setTotalFloor(int totalFloor) {
+		this.totalFloor = totalFloor;
+	}
 
+	public void setBuildingFloor(int buildingFloor) {
+		this.buildingFloor = buildingFloor;
+	}
 
-    // DTO를 Entity로 변환하는 메서드
-    public static Zip toEntity(ZipDTO zipDTO) {
-        Zip zip = new Zip();
-        zip.setId(zipDTO.getId());
-        zip.setAttachments(zipDTO.getAttachments());
-        zip.setAgentId(zipDTO.getAgentId());
-        zip.setCheckedAt(zipDTO.getCheckedAt());
-        zip.setEstateId(zipDTO.getEstateId());
-        zip.setDirection(zipDTO.getDirection());
-        zip.setTotalFloor(zipDTO.getTotalFloor());
-        zip.setBuildingFloor(zipDTO.getBuildingFloor());
-        zip.setBuildingType(zipDTO.getBuildingType());
-        zip.setDeposit(zipDTO.getDeposit());
-        zip.setFee(zipDTO.getFee());
-        zip.setAvailable(zipDTO.getAvailable());
-        zip.setHashtag(zipDTO.getHashtag());
-        zip.setM2(zipDTO.getM2());
-        zip.setLocation(zipDTO.getLocation());
-        zip.setNote(zip.getNote());
-        return zip;
-    }
+	public void setBuildingType(String buildingType) {
+		this.buildingType = buildingType;
+	}
+
+	public void setDeposit(int deposit) {
+		this.deposit = deposit;
+	}
+
+	public void setFee(int fee) {
+		this.fee = fee;
+	}
+
+	public void setAvailable(LocalDateTime available) {
+		this.available = available;
+	}
+
+	public void setHashtag(String hashtag) {
+		this.hashtag = hashtag;
+	}
+
+	public void setM2(float m2) {
+		this.m2 = m2;
+	}
+
+	public void setShowYes(String showYes) {
+		this.showYes = showYes;
+	}
+
+	// DTO를 Entity로 변환하는 메서드
+	public static Zip toEntity(ZipDTO zipDTO) {
+		Zip zip = new Zip();
+		zip.setId(zipDTO.getId());
+		zip.setAttachments(zipDTO.getAttachments());
+		zip.setAgentId(zipDTO.getAgentId());
+		zip.setCheckedAt(zipDTO.getCheckedAt());
+		zip.setEstateId(zipDTO.getEstateId());
+		zip.setDirection(zipDTO.getDirection());
+		zip.setTotalFloor(zipDTO.getTotalFloor());
+		zip.setBuildingFloor(zipDTO.getBuildingFloor());
+		zip.setBuildingType(zipDTO.getBuildingType());
+		zip.setDeposit(zipDTO.getDeposit());
+		zip.setFee(zipDTO.getFee());
+		zip.setAvailable(zipDTO.getAvailable());
+		zip.setHashtag(zipDTO.getHashtag());
+		zip.setM2(zipDTO.getM2());
+		zip.setLocation(zipDTO.getLocation());
+		zip.setNote(zipDTO.getNote());
+		zip.setShowYes(zipDTO.getShowYes());
+		zip.setRoom(zipDTO.getRoom());
+		zip.setToilet(zipDTO.getToilet());
+		zip.setMaintenanceFee(zipDTO.getMaintenanceFee());
+		zip.setPremium(zipDTO.getPremium());
+		return zip;
+	}
 }

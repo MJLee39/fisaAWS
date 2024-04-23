@@ -1,7 +1,7 @@
 server:
   port: 80   # server.port=80
-  servlet:
-    context-path: /zip  # server.servlet.context-path=/probono
+#  servlet:
+#    context-path: /zip  # server.servlet.context-path=/probono
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -34,3 +34,16 @@ grpc:
     auth-server: # 이건 gRPC 서버 이름 지정 아무거나 가능
       address: 'static://127.0.0.1:8090' # static 뒤에 gRPC 서버의 주소와 포트
       negotiation-type: plaintext # 통신 할 때 방식
+
+#cloud:
+#  aws:
+#    s3:
+#      bucket: mybucketwaf
+#    credentials:
+#      access-key:
+#      secret-key:
+#    region:
+#      static: ap-northeast-2
+#      auto: false
+#    stack:
+#      auto: false
